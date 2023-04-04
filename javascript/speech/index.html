@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+</head>
+<body>
+    <button onclick="textToSpeech()">Read Text</button>
+<textarea id="text" rows="5" cols="50">Type here the text you want to be read.</textarea>
+
+<script>
+function textToSpeech() {
+  var texto = document.getElementById("text").value;
+  var utterance = new SpeechSynthesisUtterance(texto);
+  speechSynthesis.speak(utterance);
+}
+</script>
+
+
+</body>
+</html>
