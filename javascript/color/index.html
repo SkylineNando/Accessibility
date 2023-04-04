@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+	<script>
+            function toggleBackgroundColor() {
+            var body = document.querySelector('body');
+            if (body.style.backgroundColor === 'black') {
+                body.style.backgroundColor = 'white';
+                body.style.color = 'black';
+            } else {
+                body.style.backgroundColor = 'black';
+                body.style.color = 'white';
+            }
+            }
+
+	</script>
+<style type="text/css">
+body {
+  background-color: #ffffff; /* White */
+  color: #000000; /* Brack */
+}
+</style>
+
+</head>
+<body>
+    <p>Hello World</p>
+<button onclick="toggleBackgroundColor()">Change Background Color</button>
+
+</body>
+</html>
