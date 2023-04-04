@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+</head>
+<body>
+<button onclick="textToSpeech()">Ler Texto</button>
+<textarea id="texto" rows="5" cols="50">Digite aqui o texto que deseja que seja lido.</textarea>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+<script>
+function textToSpeech() {
+  var texto = document.getElementById("texto").value;
+
+  // Cria uma requisição POST para a API do Google Cloud Text-to-Speech
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://texttospeech.googleapis.com/v1/text:synthesize");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Authorization", "Bearer <YOUR_ACCESS_TOKEN>");
+
+  // Define os parâmetros da requisição
+  var data = {
+    "input": {"text": texto},
+    "voice": {"languageCode": "en-US", "name": "en-US-Standard-C"},
+    "audioConfig": {"audioEncoding": "MP3"}
+  };
+
+  // Envia a requisição e processa a resposta
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var audioData = JSON.parse(xhr.responseText).audioContent;
+      var audioUrl = "data:audio/mp3;base64," + audioData;
+
+      // Cria um elemento de áudio e reproduz o áudio retornado pela API
+      var audio = new Audio(audioUrl);
+      audio.play();
+    } else {
+      console.log("Erro ao processar requisição: " + xhr.status);
+    }
+  };
+  xhr.send(JSON.stringify(data));
+}
+</script>
