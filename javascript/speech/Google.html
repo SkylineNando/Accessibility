@@ -25,7 +25,7 @@ function textToSpeech() {
     "audioConfig": {"audioEncoding": "MP3"}
   };
 
-  // Envia a requisição e processa a resposta
+  // Envia a requisição da resposta
   xhr.onload = function() {
     if (xhr.status === 200) {
       var audioData = JSON.parse(xhr.responseText).audioContent;
